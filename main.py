@@ -1,16 +1,36 @@
-# This is a sample Python script.
+import pygame
 
-# Press Maj+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+pygame.init()
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# generate player
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.health = 100
+        self.max_heath = 100
+        self.attack = 10
+        self.velocity = 4
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+# generate window
+pygame.display.set_caption("Double Trouble")
+screen = pygame.display.set_mode((1080, 720))
+
+# generate background
+background = pygame.image.load('assets/background1.jpg')
+
+# run game
+running = True
+while running:
+
+    # apply background
+    screen.blit(background, (0, 0))
+    pygame.display.flip()
+
+    # if player closes window
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            pygame.quit()
+            print("Closing game.")
