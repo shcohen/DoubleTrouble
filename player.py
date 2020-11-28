@@ -7,8 +7,8 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, game):
         super().__init__()
         self.game = game
-        self.health = 100
-        self.max_health = 100
+        self.max_health = 500
+        self.health = self.max_health
         self.attack = 10
         self.velocity = 1
         self.all_projectiles = pygame.sprite.Group()
@@ -20,12 +20,15 @@ class Player(pygame.sprite.Sprite):
     def damage(self, amount):
         if self.health - amount > amount:
             self.health -= amount
+        else:
+            # if player has no health points left
+            self.game.game_over()
 
     def update_health_bar(self, surface):
         # define health bar position, width and height
-        bar_position = [(self.rect.x), (self.rect.y - 10), self.health, 7]
+        bar_position = [self.rect.x, (self.rect.y - 10), self.health / 5, 7]
         # define background of health bar
-        back_bar_position = [(self.rect.x), (self.rect.y - 10), self.max_health, 7]
+        back_bar_position = [self.rect.x, (self.rect.y - 10), self.max_health / 5, 7]
 
         # draw health bar
         pygame.draw.rect(surface, (60, 63, 60), back_bar_position)
@@ -41,3 +44,8 @@ class Player(pygame.sprite.Sprite):
 
     def move_left(self):
         self.rect.x -= self.velocity
+
+    def fall(self):
+        self.rect.y += 1
+        if self.rect.y >= 720:
+            self.game.game_over()

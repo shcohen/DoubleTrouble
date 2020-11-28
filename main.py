@@ -1,4 +1,5 @@
 import pygame
+import math
 from game import Game
 
 pygame.init()
@@ -10,6 +11,21 @@ screen = pygame.display.set_mode((1080, 720))
 # generate background
 background = pygame.image.load('assets/test000.png')
 
+# generate starting banner
+banner = pygame.image.load('assets/banner0.png')
+banner = pygame.transform.scale(banner, (1080, 720))
+
+# import loading game's button
+play_button = pygame.image.load('assets/play1.png')
+play_button = pygame.transform.scale(play_button, (400, 150))
+play_button_rect = play_button.get_rect()
+play_button_rect.x = math.ceil(screen.get_width() / 1.6)
+play_button_rect.y = math.ceil(screen.get_height() / 1.28)
+
+# generate game_over's banner
+go_img = pygame.image.load('assets/game_over.png')
+go_img = pygame.transform.scale(go_img, (1080, 720))
+
 # generate game
 game = Game()
 
@@ -20,32 +36,19 @@ while running:
     # apply background
     screen.blit(background, (-100, 0))
 
-    # apply player
-    screen.blit(game.player.image, game.player.rect)
-
-    # update player health bar
-    game.player.update_health_bar(screen)
-
-    # get player's projectile
-    for projectile in game.player.all_projectiles:
-        projectile.move()
-
-    # apply all projectiles
-    game.player.all_projectiles.draw(screen)
-
-    # generate monster's movements
-    for monster in game.all_monsters:
-        monster.forward()
-        monster.update_health_bar(screen)
-
-    # apply all monsters
-    game.all_monsters.draw(screen)
-
-    # check directions
-    if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x < 819:
-        game.player.move_right()
-    elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x > 178:
-        game.player.move_left()
+    # check if game has started
+    if game.is_playing:
+        # start instructions
+        game.update(screen)
+    else:
+        if not game.restart:
+            # add starting banner
+            screen.blit(banner, (0, 0))
+            screen.blit(play_button, play_button_rect)
+        else:
+            # add game_over banner
+            screen.blit(go_img, (0, 0))
+            screen.blit(play_button, play_button_rect)
 
     # update screen
     pygame.display.flip()
@@ -67,3 +70,10 @@ while running:
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            # check if mouse is on play button
+            if play_button_rect.collidepoint(event.pos):
+                # start game
+                game.start()
+

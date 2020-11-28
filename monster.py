@@ -9,12 +9,12 @@ class Monster(pygame.sprite.Sprite):
         self.game = game
         self.health = 100
         self.max_health = 100
-        self.attack = 3
-        self.velocity = 0.0002
+        self.attack = 0.1
+        self.velocity = 0.1
         self.image = pygame.image.load('assets-pygame/mummy.png')
         self.image = pygame.transform.scale(self.image, (180, 180))
         self.rect = self.image.get_rect()
-        self.rect.x = 700 + random.randint(0, 200)
+        self.rect.x = 700
         self.rect.y = 300
 
     def damage(self, amount):
@@ -52,10 +52,9 @@ class Monster(pygame.sprite.Sprite):
             self.game.player.damage(self.attack)
 
     # check if monster is still on screen
-        if self.rect.y > 720:
+        if self.rect.y >= 720:
             # remove monster from screen
             self.remove()
-            print("Monster removed")
 
-        # def backward(self):
-        # self.rect.x += self.velocity
+    # def backward(self):
+    # self.rect.x += self.velocity
