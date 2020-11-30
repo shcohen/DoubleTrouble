@@ -36,14 +36,14 @@ class CometFallEvent:
         # barre noire
         pygame.draw.rect(surface, (0, 0, 0), [
             0,
-            surface.get_height() - 300,
+            surface.get_height() - 10,
             surface.get_width(),
             10
         ])
         # barre rouge
         pygame.draw.rect(surface, (255, 1, 1), [
             0,
-            surface.get_height() - 300,
+            surface.get_height() - 10,
             (surface.get_width() / 100) * self.percent,
             10
         ])

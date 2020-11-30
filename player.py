@@ -10,12 +10,12 @@ class Player(pygame.sprite.Sprite):
         self.max_health = 500
         self.health = self.max_health
         self.attack = 10
-        self.velocity = 1
+        self.velocity = 2
         self.all_projectiles = pygame.sprite.Group()
         self.image = pygame.image.load('assets/zelda.png')
         self.rect = self.image.get_rect()
-        self.rect.x = 350
-        self.rect.y = 300
+        self.rect.x = 400
+        self.rect.y = 200
 
     def damage(self, amount):
         if self.health - amount > amount:
@@ -47,5 +47,5 @@ class Player(pygame.sprite.Sprite):
 
     def fall(self):
         self.rect.y += 1
-        if self.rect.y >= 1080:
+        if self.rect.y >= 600:
             self.game.game_over()

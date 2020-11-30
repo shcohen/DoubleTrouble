@@ -1,8 +1,8 @@
 import pygame
 from player import Player
 from monster import Monster
-from comet import Comet
 from comet_event import CometFallEvent
+
 
 # generate game
 class Game:

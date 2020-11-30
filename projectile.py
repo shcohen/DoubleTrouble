@@ -8,9 +8,9 @@ class Projectile(pygame.sprite.Sprite):
         self.velocity = 1.5
         self.player = player
         self.image = pygame.image.load('assets/attack.png')
-        self.image = pygame.transform.scale(self.image, (180, 180))
+        self.image = pygame.transform.scale(self.image, (45, 45))
         self.rect = self.image.get_rect()
-        self.rect.x = player.rect.x + 70
+        self.rect.x = player.rect.x + 169
         self.rect.y = player.rect.y
         self.origin_image = self.image
         self.angle = 0
@@ -36,7 +36,7 @@ class Projectile(pygame.sprite.Sprite):
             monster.damage(self.player.attack)
 
         # check if projectile is still on screen
-        if self.rect.x > 1080:
+        if self.rect.x > 600:
             # delete projectile
             self.remove()
             print("Projectile removed")

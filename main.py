@@ -2,35 +2,36 @@ import pygame
 import math
 from game import Game
 
-#file = "assets/.wav"
-#pygame.init()
-#pygame.mixer.init()
-#pygame.mixer.music.load(file)
-#pygame.mixer.music.play(-1)
+file = "assets/One-Piece-Epic-Battle-Theme.wav"
+pygame.mixer.init()
+pygame.mixer.music.load(file)
+pygame.mixer.music.play(-1)
 
 pygame.init()
 
 # generate window
 pygame.display.set_caption("Double Trouble")
-screen = pygame.display.set_mode((1920, 1080))
+screen = pygame.display.set_mode((1200, 600))
 
 # generate background
 background = pygame.image.load('assets/background.jpg')
+background = pygame.transform.scale(background, (1400, 700))
+
 
 # generate starting banner
 banner = pygame.image.load('assets/banner.JPEG')
-banner = pygame.transform.scale(banner, (1920, 1080))
+banner = pygame.transform.scale(banner, (1200, 600))
 
 # import loading game's button
 play_button = pygame.image.load('assets/brawl.png')
-play_button = pygame.transform.scale(play_button, (400, 150))
+play_button = pygame.transform.scale(play_button, (500, 150))
 play_button_rect = play_button.get_rect()
 play_button_rect.x = math.ceil(screen.get_width() / 1.6)
 play_button_rect.y = math.ceil(screen.get_height() / 1.28)
 
 # generate game_over's banner
 go_img = pygame.image.load('assets/game_over.png')
-go_img = pygame.transform.scale(go_img, (1080, 720))
+go_img = pygame.transform.scale(go_img, (1200, 600))
 
 # generate game
 game = Game()

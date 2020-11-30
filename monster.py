@@ -14,8 +14,8 @@ class Monster(pygame.sprite.Sprite):
         self.image = pygame.image.load('assets/ganon.png')
         self.image = pygame.transform.scale(self.image, (180, 180))
         self.rect = self.image.get_rect()
-        self.rect.x = 700
-        self.rect.y = 300
+        self.rect.x = 800
+        self.rect.y = 200
 
     def damage(self, amount):
         # inflict damages
@@ -59,6 +59,6 @@ class Monster(pygame.sprite.Sprite):
             self.game.player.damage(self.attack)
 
     # check if monster is still on screen
-        if self.rect.y >= 1080:
+        if self.rect.y >= 600:
             # remove monster from screen
             self.remove()
