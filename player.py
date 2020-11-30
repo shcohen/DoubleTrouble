@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.attack = 10
         self.velocity = 1
         self.all_projectiles = pygame.sprite.Group()
-        self.image = pygame.image.load('assets/test1.png')
+        self.image = pygame.image.load('assets/zelda.png')
         self.rect = self.image.get_rect()
         self.rect.x = 350
         self.rect.y = 300
@@ -47,5 +47,5 @@ class Player(pygame.sprite.Sprite):
 
     def fall(self):
         self.rect.y += 1
-        if self.rect.y >= 720:
+        if self.rect.y >= 1080:
             self.game.game_over()

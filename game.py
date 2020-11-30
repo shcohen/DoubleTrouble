@@ -1,7 +1,8 @@
 import pygame
 from player import Player
 from monster import Monster
-
+from comet import Comet
+from comet_event import CometFallEvent
 
 # generate game
 class Game:
@@ -14,6 +15,8 @@ class Game:
         self.all_players = pygame.sprite.Group()
         self.player = Player(self)
         self.all_players.add(self.player)
+        # generer comete
+        self.comet_event = CometFallEvent(self)
         # create monster group
         self.all_monsters = pygame.sprite.Group()
         self.pressed = {}
@@ -46,6 +49,16 @@ class Game:
 
         # apply all projectiles
         self.player.all_projectiles.draw(screen)
+
+        # generate comets
+        for comet in self.comet_event.all_comets:
+            comet.fall()
+
+        # refresh comets
+        self.comet_event.update_bar(screen)
+
+        # apply comets
+        self.comet_event.all_comets.draw(screen)
 
         # generate monster's movements
         for monster in self.all_monsters:

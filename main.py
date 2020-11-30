@@ -2,21 +2,27 @@ import pygame
 import math
 from game import Game
 
+#file = "assets/.wav"
+#pygame.init()
+#pygame.mixer.init()
+#pygame.mixer.music.load(file)
+#pygame.mixer.music.play(-1)
+
 pygame.init()
 
 # generate window
 pygame.display.set_caption("Double Trouble")
-screen = pygame.display.set_mode((1080, 720))
+screen = pygame.display.set_mode((1920, 1080))
 
 # generate background
-background = pygame.image.load('assets/test000.png')
+background = pygame.image.load('assets/background.jpg')
 
 # generate starting banner
-banner = pygame.image.load('assets/banner0.png')
-banner = pygame.transform.scale(banner, (1080, 720))
+banner = pygame.image.load('assets/banner.JPEG')
+banner = pygame.transform.scale(banner, (1920, 1080))
 
 # import loading game's button
-play_button = pygame.image.load('assets/play1.png')
+play_button = pygame.image.load('assets/brawl.png')
 play_button = pygame.transform.scale(play_button, (400, 150))
 play_button_rect = play_button.get_rect()
 play_button_rect.x = math.ceil(screen.get_width() / 1.6)
@@ -76,4 +82,3 @@ while running:
             if play_button_rect.collidepoint(event.pos):
                 # start game
                 game.start()
-

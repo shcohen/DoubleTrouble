@@ -11,7 +11,7 @@ class Monster(pygame.sprite.Sprite):
         self.max_health = 100
         self.attack = 0.1
         self.velocity = 0.1
-        self.image = pygame.image.load('assets-pygame/mummy.png')
+        self.image = pygame.image.load('assets/ganon.png')
         self.image = pygame.transform.scale(self.image, (180, 180))
         self.rect = self.image.get_rect()
         self.rect.x = 700
@@ -27,6 +27,13 @@ class Monster(pygame.sprite.Sprite):
             self.rect.x = 700 + random.randint(0, 200)
             self.rect.y = 300
             self.health = self.max_health
+
+            # si barre d'evenements chargée
+            if self.game.comet_event.is_full_loaded():
+                self.game.all_monsters.remove(self)
+
+                # appel de la methode pour lancer la pluie de comete
+                self.game.comet_event.attempt_fall()
 
     def update_health_bar(self, surface):
         # define health bar position, width and height
@@ -52,9 +59,6 @@ class Monster(pygame.sprite.Sprite):
             self.game.player.damage(self.attack)
 
     # check if monster is still on screen
-        if self.rect.y >= 720:
+        if self.rect.y >= 1080:
             # remove monster from screen
             self.remove()
-
-    # def backward(self):
-    # self.rect.x += self.velocity
